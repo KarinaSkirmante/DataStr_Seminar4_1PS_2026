@@ -23,8 +23,28 @@ public class MyGraph<Ttype>{
 		vertices = new MyVerticeNode[size];
 	}
 	
-	//isEmpty
-	//isFull
-	//resize
+	
+	public boolean isEmpty() {
+		return (howManyElements == 0);
+	}
+	
+	public boolean isFull() {
+		return (howManyElements == size);
+	}
+	
+	private void resize() {
+		int newSize = (size <= 100) ? (size * 2) : ((int)(size*1.5));
+		
+		MyVerticeNode<Ttype>[] newVertices = new MyVerticeNode[newSize];
+		
+		for(int i = 0; i < howManyElements; i++) {
+			newVertices[i] = vertices[i];
+		}
+		size = newSize;
+		vertices = newVertices;
+		System.gc();
+		
+	}
+	
 
 }
