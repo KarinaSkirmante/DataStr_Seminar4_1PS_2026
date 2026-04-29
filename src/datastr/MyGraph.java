@@ -68,5 +68,55 @@ public class MyGraph<Ttype>{
 		howManyElements++;
 		
 	}
+	
+	
+	public void addEdge(Ttype elementFrom, Ttype elementTo, int weight) 
+			throws Exception
+	{
+		if(elementFrom == null || elementTo == null || weight <= 0)
+		{
+			throw new Exception("Kāds no ievades parametriem nav atbilstošs");
+		}
+		
+		int indexOfElementFrom = findVertice(elementFrom);		
+		int indexOfElementTo = findVertice(elementTo);
+
+		MyEdgeNode newEdge = new MyEdgeNode(indexOfElementTo, weight);
+		
+		MyVerticeNode verticeNodeFrom = vertices[indexOfElementFrom];
+		//noskaidrojam, vai edgeNOde būs kā pirmais
+		if(verticeNodeFrom.getFirstEdgeNode() == null) {
+			verticeNodeFrom.setFirstEdgeNode(newEdge);
+		}
+		//vai tas ir kārtejais edgeNode objekts, aks pielipinats saistītajā pierakstā
+		else
+		{
+			MyEdgeNode currentNode = verticeNodeFrom.getFirstEdgeNode();
+			//TODO ja vēlas, tad var optimizet un vinemēr likt kā pirmo, pie kura pielpina iepriekšējo pirmo
+			while(currentNode.getNextEdgeNode() != null) {
+				currentNode = currentNode.getNextEdgeNode();
+			}
+			
+			currentNode.setNextEdgeNode(newEdge);
+			
+		}
+		
+	}
+	
+	
+	private int findVertice(Ttype element) throws Exception{
+		if(element == null) {
+			throw new Exception("Elements nevar būt bez references");
+		}
+		
+		for(int i = 0; i < howManyElements; i++) {
+			if(vertices[i].getElement().equals(element)) {
+				return i;//i -> atrastas pilsetas indekss masīvā
+			}
+		}
+		
+		throw new Exception("Meklētā virsotne nav atrasta");
+		
+	}
 
 }
