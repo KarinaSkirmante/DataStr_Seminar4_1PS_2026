@@ -46,5 +46,27 @@ public class MyGraph<Ttype>{
 		
 	}
 	
+	
+	public void addVertice(Ttype element) throws Exception{
+		if(element == null) {
+			throw new Exception("Elements nevar būt bez references");
+		}
+		
+		for(int i = 0; i < howManyElements; i++) {
+			if(vertices[i].getElement().equals(element)) {
+				throw new Exception("Tad elements jau eksistē grafā. To nevar pievienot atkārtoti");
+			}
+		}
+		
+		if(isFull())
+		{
+			resize();
+		}
+		
+		MyVerticeNode newVerticeNode =  new MyVerticeNode(element);
+		vertices[howManyElements] = newVerticeNode;
+		howManyElements++;
+		
+	}
 
 }
