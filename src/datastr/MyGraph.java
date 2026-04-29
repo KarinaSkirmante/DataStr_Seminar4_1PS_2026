@@ -125,7 +125,22 @@ public class MyGraph<Ttype>{
 		}
 		
 		for(int i = 0; i < howManyElements; i++) {
-			System.out.println(vertices[i].toString());//toString no MyVerticeNode
+			//System.out.println(vertices[i].toString());//toString no MyVerticeNode
+			
+			System.out.print(vertices[i].getElement()+ ": ");
+			
+			MyEdgeNode currentNode = vertices[i].getFirstEdgeNode();
+			while(currentNode != null) {
+				
+				int indexVerticeTo = currentNode.getIndexOfVerticeTo();
+				System.out.print("-> " + vertices[indexVerticeTo].getElement()
+						+ " ---" + currentNode.getWeight() + " km ---; " );
+				
+				currentNode = currentNode.getNextEdgeNode();
+				
+			}
+			System.out.println();
+			
 		}
 	}
 

@@ -37,7 +37,9 @@ public class MainService {
 			//TODO papildināt ar citiem ceļiem
 			
 			map.print();
-			
+			//TODO uztaisīt,lai izprintēt tieši elementa vērtību nevis indeksu
+			//TODO uztaisīt removeVertice
+			//TODO uztaisīt removeEdge
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

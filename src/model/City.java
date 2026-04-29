@@ -34,7 +34,7 @@ public class City {
 	}
 	
 	public String toString() {
-		return title + ", " + areaKm2 + " km^2 [" + postalCode + "]";
+		return title;// TODO pievienot šo, ja velas par pilsetu parādīt visu info + ", " + areaKm2 + " km^2 [" + postalCode + "]";
 	}
 
 }
