@@ -3,7 +3,7 @@ package datastr;
 public class MyEdgeNode {
 	//1. mainīgie
 	private int indexOfVerticeTo;
-	private int weight;// TODO ja vēlas, var arī float
+	private int weight;// TODO ja vēlas, var arī float vai taisīt ar Ttype2
 	private MyEdgeNode nextEdgeNode = null;
 	
 	//2. getters
