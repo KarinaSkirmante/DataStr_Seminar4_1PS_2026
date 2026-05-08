@@ -4,6 +4,7 @@ public class MyVerticeNode<Ttype> {
 	//1. mainīgie
 	private Ttype element;
 	private MyEdgeNode firstEdgeNode = null;
+	private boolean isVisited = false;//vakjdzīgs tikai apstaigāšanas algoritmam
 	//2. getters
 	public Ttype getElement() {
 		return element;
@@ -27,7 +28,12 @@ public class MyVerticeNode<Ttype> {
 		this.firstEdgeNode = firstEdgeNode;
 	}
 	
-	
+	public boolean isVisited() {
+		return isVisited;
+	}
+	public void setVisited(boolean isVisited) {
+		this.isVisited = isVisited;
+	}
 	//4.konstruktori/s
 	public MyVerticeNode(Ttype element) {
 		setElement(element);
