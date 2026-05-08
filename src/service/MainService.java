@@ -37,6 +37,9 @@ public class MainService {
 			//TODO papildināt ar citiem ceļiem
 			
 			map.print();
+			
+			System.out.println(map.getPath(c1, c2));//Ventspils->Tukums
+			System.out.println(map.getPath(c1, c5));//Ventspils->Saldus
 			//TODO uztaisīt,lai izprintēt tieši elementa vērtību nevis indeksu
 			//TODO uztaisīt removeVertice
 			//TODO uztaisīt removeEdge
