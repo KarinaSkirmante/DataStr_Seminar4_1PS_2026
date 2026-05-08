@@ -1,5 +1,8 @@
 package datastr;
 
+import java.util.ArrayList;
+import java.util.Stack;
+
 public class MyGraph<Ttype>{
 	private MyVerticeNode<Ttype>[] vertices;
 	private final int DEFAULT_SIZE = 5;
@@ -143,5 +146,76 @@ public class MyGraph<Ttype>{
 			
 		}
 	}
+	
+	private void setAllVerticesToIsVisitedFalse() {
+		for(int i = 0; i < howManyElements;i++) {
+			vertices[i].setVisited(false);
+		}
+	}
+	private ArrayList<MyVerticeNode> getAllNeighbours(int indexOfVertice){
+		//TODO ja vēlas, uztaisīt pārbaudi uz ienākošo mainīgo
+		
+		MyVerticeNode<Ttype> verticeFrom = vertices[indexOfVertice];
+		
+		ArrayList<MyVerticeNode> allNeighbours = new ArrayList<MyVerticeNode>();
+		
+		MyEdgeNode currentEdgeNode = verticeFrom.getFirstEdgeNode();
+		
+		while(currentEdgeNode!=null) {
+			int indexOfNeighbour = currentEdgeNode.getIndexOfVerticeTo();
+			MyVerticeNode neighbour = vertices[indexOfNeighbour];
+			allNeighbours.add(neighbour);
+			currentEdgeNode = currentEdgeNode.getNextEdgeNode();	
+		}
 
+		return allNeighbours;
+		
+	}
+	
+	public String getPath(Ttype elementFrom, Ttype elementTo) throws Exception{
+		if(isEmpty()) {
+			throw new Exception("Ceļu nevar atrast, jo grafs ir tukšs");
+		}
+		
+		if(elementFrom == null || elementTo == null) {
+			throw new Exception("Kāds no ievades parametriem nav atbilstošs");
+		}
+		
+		int indexVerticeFrom = findVertice(elementFrom);
+		int indexVerticeTo = findVertice(elementTo);
+		
+		setAllVerticesToIsVisitedFalse();
+		boolean isPath = false;
+		
+		Stack<MyVerticeNode> stack = new Stack<MyVerticeNode>();
+		stack.push(vertices[indexVerticeFrom]);
+		String path = "";
+		do
+		{
+			MyVerticeNode verticeTemp = stack.pop();
+			if(verticeTemp.getElement().equals(elementTo)) {
+				path += "-> " + verticeTemp.getElement();
+				isPath = true;
+			}
+			else{
+				path += "-> " + verticeTemp.getElement();
+				int index = findVertice((Ttype)verticeTemp.getElement());
+				ArrayList<MyVerticeNode> neighbours = getAllNeighbours(index);
+				for(MyVerticeNode tempV: neighbours) {
+					if(!tempV.isVisited()) {
+						stack.push(tempV);
+					}
+				}
+			}
+			
+			
+		}while(!stack.isEmpty() && !isPath);
+		
+		if(!isPath) {
+			path = "Ceļš no " + elementFrom + " uz " + elementTo + " nav atrasts";
+		}
+		return path;
+	}
+	
+	
 }
